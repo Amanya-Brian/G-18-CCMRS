@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/index','PagesController@index');
+
+Route::get('/login','PagesController@login');
+
+Route::get('/EnrollOfficer','PagesController@EnrollOfficer');
+
+Route::get('/RecordFunds','PagesController@RecordFunds');
+
+Route::get('/PatientList','PagesController@PatientList');
+
+Route::get('/Hierachy','PagesController@Hierachy');
+
+Route::get('/EnrolGraph','PagesController@EnrolGraph');
+
+Route::get('/Payments','PagesController@Payments');
+
+Route::get('/Donations','PagesController@Donations');
