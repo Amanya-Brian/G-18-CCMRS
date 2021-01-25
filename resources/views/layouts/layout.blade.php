@@ -9,7 +9,14 @@
         
     </head>
     <body class="antialiased">
-        @yield('content')
-        <footer>Ministry of Health Uganda</footer>
+        @include('layouts.menu')
+        <div class="container">
+            <div class="jumbotron text-center">
+                @yield('content')
+                <footer>Ministry of Health Uganda</footer>
+            </div>
+            
+        </div>
+        
     </body>
 </html>

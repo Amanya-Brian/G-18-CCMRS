@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/index','PagesController@index');
 
-Route::get('/login','PagesController@login');
+//Route::get('/login','PagesController@login');
 
 Route::get('/EnrollOfficer','PagesController@EnrollOfficer');
 
@@ -34,3 +34,7 @@ Route::get('/EnrolGraph','PagesController@EnrolGraph');
 Route::get('/Payments','PagesController@Payments');
 
 Route::get('/Donations','PagesController@Donations');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
