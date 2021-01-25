@@ -6,7 +6,13 @@
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
         <title>{{config('app.name','CCMRS')}}</title>
 
-        
+        <style type="text/css">
+            .box{
+             width:600px;
+             margin:0 auto;
+             border:1px solid #ccc;
+            }
+           </style>
     </head>
     <body class="antialiased">
         @yield('content')
