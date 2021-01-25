@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/index','PagesController@index');
+Route::get('/','PagesController@index');
 
 //Route::get('/login','PagesController@login');
+
+Route::post('/login/checklogin','PagesController@checklogin');
+
+Route::get('/login/home','PagesController@successlogin');
+
+Route::get('/login/logout','PagesController@logout');
 
 Route::get('/EnrollOfficer','PagesController@EnrollOfficer');
 
