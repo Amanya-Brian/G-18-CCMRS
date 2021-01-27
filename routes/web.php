@@ -26,7 +26,11 @@ Route::get('/login/logout','PagesController@logout');
 
 Route::get('/EnrollOfficer','PagesController@EnrollOfficer');
 
+Route::post('/storeOfficer', 'PagesController@StoreOfficer');
+
 Route::get('/RecordFunds','PagesController@RecordFunds');
+
+Route::post('/storefunds', 'PagesController@StoreFunds');
 
 Route::get('/PatientList','PagesController@PatientList');
 
