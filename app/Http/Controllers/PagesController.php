@@ -12,9 +12,9 @@ use Auth;
 class PagesController extends Controller
 {
     public function login(){
-        return view('pages.login');
+        return view('layouts.app');
     }
-    public function checklogin(Request $request)
+    /* public function checklogin(Request $request)
     {
      $request->validate([
       'username'   => 'required|string',
@@ -43,8 +43,9 @@ class PagesController extends Controller
     public function logout()
     {
      Auth::logout();
-     return redirect('login');
-    }
+     return redirect('pages.login');
+    } */
+
     public function index(){
         return view('pages.index');
     }
