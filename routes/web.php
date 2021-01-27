@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','PagesController@index');
 
-Route::get('/login','PagesController@login');
+//Route::get('/login','PagesController@login');
 
 Route::post('/login/checklogin','PagesController@checklogin');
 
@@ -41,3 +41,7 @@ Route::get('/EnrolGraph','PagesController@EnrolGraph');
 Route::get('/Payments','PagesController@Payments');
 
 Route::get('/Donations','PagesController@Donations');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

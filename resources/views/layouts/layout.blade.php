@@ -15,8 +15,21 @@
             }
            </style>
     </head>
+Roy_laravel
+    <body class="antialiased">
+        @include('layouts.menu')
+        <div class="container">
+            <div class="jumbotron text-center">
+                @yield('content')
+                <footer>Ministry of Health Uganda</footer>
+            </div>
+            
+        </div>
+        
+=======
     <body class="antialiased" >
         @yield('content')
         <footer>Ministry of Health Uganda</footer>
+ amanya_laravel
     </body>
 </html>
