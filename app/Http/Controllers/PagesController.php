@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Treasury;
+use App\Models\Officer;
 use Validator;
 use Auth;
 
@@ -58,6 +60,16 @@ class PagesController extends Controller
         return view('pages.EnrollOfficer');
     }
 
+    public function StoreOfficer(Request $request)
+    {
+        $officer = new Officer;
+        $officer->username = $request->username;
+        $officer->district = $request->district;
+        $officer->hospital = $request->hospital;
+        $officer->save();
+        return redirect('/EnrollOfficer')->with('status', 'A new officer has been added.');
+    }
+
     public function Hierachy(){
         return view('pages.Hierachy');
     }
@@ -74,5 +86,13 @@ class PagesController extends Controller
         return view('pages.RecordFunds');
     }
 
+    public function StoreFunds(Request $request)
+    {
+        $funds = new Treasury;
+        $funds->date = date('M');
+        $funds->amount = $request->amount;
+        $funds->save();
+        return redirect('/RecordFunds')->with('status', 'Monthly funds Have Been inserted');
+    }
 
 }
