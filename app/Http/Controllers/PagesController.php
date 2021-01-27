@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator;
-use Auth;
+
 
 class PagesController extends Controller
 {
-    public function login(){
+   /* public function login(){
         return view('pages.login');
     }
     public function checklogin(Request $request)
@@ -35,13 +34,8 @@ class PagesController extends Controller
     }
     public function successlogin()
     {
-     return view('home');
-    }
-    public function logout()
-    {
-     Auth::logout();
-     return redirect('login');
-    }
+     return view('home'); 
+    }*/
     public function index(){
         return view('pages.index');
     }
