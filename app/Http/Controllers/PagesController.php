@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Treasury;
 use App\Models\Officer;
+use DB;
 use Validator;
 use Auth;
 
@@ -75,7 +76,8 @@ class PagesController extends Controller
     }
 
     public function PatientList(){
-        return view('pages.PatientList');
+        $patients = DB::select('select * from patients');
+        return view('pages.PatientList', ['patients'=>$patients]);
     }
 
     public function Payments(){
