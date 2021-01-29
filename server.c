@@ -38,44 +38,45 @@ int main()
 	perror("Error on Accept");
 	
 	char patient_details[256];
-        
-	
+    	char command[40]; 
+	char district[20];
+	recv(newsockfd,district,sizeof(district),0);
 	while(1)
 	{
-		bzero(patient_details,255);
-		n = recv(newsockfd,buffer,255,0);
+		n = recv(newsockfd,command,40,0);
 		if(n<0)
 			perror("Error on reading");
-		if(buffer == "bye")
+		if(strstr(command,"done"))
 		{
 			printf("Client Closed the connection, do you want to close too?\n");
-			bzero(buffer,255);
+			bzero(command,40);
 			fgets(buffer,5,stdin);
-			if(buffer == "yes")
-			break;
+			if(strstr(buffer,"yes"))
+			    break;
 		}
-		else{
+        
+		else if(strstr(command,"Addpatient")){
 		//Inserting patient into file
+        	bzero(command,40);
 		FILE *fp;
-		char district[20];
-		recv(newsockfd,district,sizeof(district),0);
-		char file_path[] = ".txt";
-        	char district_file[256];
-        	district_file == strcat(district,file_path);
-        	printf("%s\n",district_file);
-        	recv(newsockfd,patient_details,256,0);
-        	fp = fopen(district_file, "a+");
+		char file_path[4] = ".txt";
+		strcat(district,file_path);
+        	recv(newsockfd,patient_details,sizeof(patient_details),0);
+        	fp = fopen(district, "a");
    		//writing patient to a district file
         	fprintf(fp ,"%s\n", patient_details);
+            	printf("\nSuccessfully added to %s",district);
         	fclose(fp);
         	bzero(patient_details,sizeof(patient_details));
-        	printf("\nSuccessfully added to %s",district);
         	printf("\n");
 		char status[255] = "Patient Added Successfully\n";
 		n = send(newsockfd,status,strlen(status),0);
-		if(n<0)
-			perror("Error on writing");
+			if(n<0)
+				perror("Error on writing");
+		district=="";
 		}
+		else
+			continue;
 	}
 	close(newsockfd);
 	close(sockfd);
