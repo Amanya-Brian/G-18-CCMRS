@@ -19,5 +19,6 @@
             </div>
         </div>
     </div>
+    <button type="button" class="btn btn-link"><a href="{{ url('/') }}">Home</a></button>
 </div>
 @endsection
