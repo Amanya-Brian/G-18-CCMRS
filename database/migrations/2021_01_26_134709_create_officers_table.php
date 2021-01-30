@@ -17,7 +17,9 @@ class CreateOfficersTable extends Migration
             $table->bigIncrements('officerId');
             $table->string('username');
             $table->string('district');
-            $table->string('hospital');
+            $table->integer('patients_treated')->default(0);
+            $table->string('hospital')->nullable();
+            $table->string('position')->default('health officer');
         });
     }
 

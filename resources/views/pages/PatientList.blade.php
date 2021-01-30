@@ -23,5 +23,6 @@
           </tr>
           @endforeach
           </table>
+          <p>Total Patients: {{ $total }}  </p> 
 
 @endsection

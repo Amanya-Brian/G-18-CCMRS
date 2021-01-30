@@ -20,7 +20,7 @@ class PagesController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function login(){
         return view('layouts.app');
     }
@@ -87,8 +87,9 @@ class PagesController extends Controller
     }
 
     public function PatientList(){
-     /*   $patients = DB::select('select * from patients');
-        return view('pages.PatientList', ['patients'=>$patients]); */
+        $patients = DB::select('select * from patients');
+        $total = DB::table('patients')->count();
+        return view('pages.PatientList', ['patients'=>$patients, 'total'=>$total]); 
     }
 
     public function Payments(){
