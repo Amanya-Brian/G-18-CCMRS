@@ -10,7 +10,7 @@
 int main()
 {
 	int sockfd, newsockfd,n;
-	char buffer[255];
+	char buffer[10];
 	
 	struct sockaddr_in serv_addr, cli_addr;
 	socklen_t clilen;
@@ -37,10 +37,18 @@ int main()
 	if(newsockfd<0)
 	perror("Error on Accept");
 	
-	char patient_details[256];
-    	char command[40]; 
 	char district[20];
 	recv(newsockfd,district,sizeof(district),0);
+	//char patient_details[256];
+	struct patient_details{
+		char fName[15];
+		char lName[15];
+		char dateFound[10];
+		char gender[1];
+		char category[20];
+		char healthOfficer[20];
+	}patient;
+    	char command[40]; 
 	while(1)
 	{
 		n = recv(newsockfd,command,40,0);
@@ -50,7 +58,7 @@ int main()
 		{
 			printf("Client Closed the connection, do you want to close too?\n");
 			bzero(command,40);
-			fgets(buffer,5,stdin);
+			scanf("%s",buffer);
 			if(strstr(buffer,"yes"))
 			    break;
 		}
@@ -59,21 +67,23 @@ int main()
 		//Inserting patient into file
         	bzero(command,40);
 		FILE *fp;
-		char file_path[4] = ".txt";
-		strcat(district,file_path);
-        	recv(newsockfd,patient_details,sizeof(patient_details),0);
-        	fp = fopen(district, "a");
+		char *file_path = ".txt";
+		char *dFile;
+		strcpy(dFile,district);
+		strcat(dFile,file_path);
+        	recv(newsockfd,(struct patient_details *)&patient,sizeof(patient),0);
+        	fp = fopen(dFile, "a");
    		//writing patient to a district file
-        	fprintf(fp ,"%s\n", patient_details);
+        	fprintf(fp ,"%s\t%s\t%s\t%s\t%s\t%s\n",patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
             	printf("\nSuccessfully added to %s",district);
         	fclose(fp);
-        	bzero(patient_details,sizeof(patient_details));
+        	bzero((void *)&patient,sizeof(patient));
         	printf("\n");
 		char status[255] = "Patient Added Successfully\n";
 		n = send(newsockfd,status,strlen(status),0);
 			if(n<0)
 				perror("Error on writing");
-		district=="";
+		//free(dFile);
 		}
 		else
 			continue;

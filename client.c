@@ -13,7 +13,14 @@ int main()
 {
 	int sockfd,n;
 	struct sockaddr_in serv_addr;
-	char patient_details[255];
+	struct patient_details{
+		char fName[15];
+		char lName[15];
+		char dateFound[10];
+		char gender[1];
+		char category[20];
+		char healthOfficer[20];
+	}patient;
 	char file_check[256];
 	//Creating the socket
 	sockfd = socket(AF_INET,SOCK_STREAM,0);
@@ -31,29 +38,33 @@ int main()
 	//capturing district
 	char district[40];
 	printf(">>>Please Enter your District!\n");
-	fgets(district,sizeof(district),stdin);
+	//fgets(district,sizeof(district),stdin);
+	scanf("%s",district);
 	send(sockfd,district,sizeof(district),0);
 	char command[256];
 	while(1)
 	{
-		bzero(district,40);
-		fgets(command,100,stdin);
+		//Getting command
+		scanf("%s\t",command);
 		send(sockfd,command,100,0);
 		//breaking out of the loop
 		if(strstr(command,"done")){
-		break;
+		bzero(command,sizeof(command));
+			break;
+			close(sockfd);
 		}
 			
 		//Adding Patient
 		else if(strstr(command,"Addpatient")){
 		bzero(command,40);
-		fgets(patient_details,255,stdin);
-		n = send(sockfd,patient_details,strlen(patient_details),0);
+		//fgets(patient_details,255,stdin);
+	scanf("%s\t%s\t%s\t%s\t%s\t%s",patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+		n = send(sockfd,(struct patient_details *)&patient,sizeof(patient),0);
 		if(n<0)
 			perror("Error on writing");
-		bzero(patient_details,255);
-		char status[256];
-		n = recv(sockfd,status,255,0);
+		bzero((void *)&patient,sizeof(patient));
+		char status[40];
+		n = recv(sockfd,status,sizeof(status),0);
 		if(n<0)
 			perror("Error on reading");
 		printf("%s\n",status);
