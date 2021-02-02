@@ -26,7 +26,7 @@ class PagesController extends Controller
 
     public function login(){
         return view('layouts.app');
-
+    }
 
     public function index(){
         return view('pages.index');
