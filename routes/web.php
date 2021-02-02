@@ -16,13 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','PagesController@index');
 
-//Route::get('/login','PagesController@login');
+// Route::get('/login','PagesController@login');
 
-Route::post('/login/checklogin','PagesController@checklogin');
+Route::get('/login','PagesController@login');
 
-Route::get('/login/home','PagesController@successlogin');
+// Route::post('/login/checklogin','PagesController@checklogin');
 
-Route::get('/login/logout','PagesController@logout');
+// Route::get('/login/home','PagesController@successlogin');
+
+// Route::get('/login/logout','PagesController@logout');
 
 Route::get('/EnrollOfficer','PagesController@EnrollOfficer');
 
@@ -44,4 +46,4 @@ Route::get('/Donations','PagesController@Donations');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');

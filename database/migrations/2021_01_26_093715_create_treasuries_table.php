@@ -15,7 +15,7 @@ class CreateTreasuriesTable extends Migration
     {
         Schema::create('treasuries', function (Blueprint $table) {
             $table->bigIncrements('transactionId');
-            $table->varchar('date', $precision = 0);
+            $table->string('date', $precision = 0);
             $table->float('amount', 12, 2);
         });
     }
