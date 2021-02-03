@@ -34,16 +34,24 @@ int main()
 	//Connecting to server
 	if(connect(sockfd, (struct sockaddr *)&serv_addr,sizeof(serv_addr))<0)
 		perror("Connection Faield");
-	printf(" --- COVID-19 MANAGEMENT AND REPORTING --- \n\n");
+	printf(" --- COVID-19 MANAGEMENT AND REPORTING SYSTEM--- \n\n");
 	//capturing district
 	char district[40];
-	printf(">>>Please Enter your District!\n");
+	printf(">>>Hello officer, Please Enter your District!\n");
 	//fgets(district,sizeof(district),stdin);
 	scanf("%s",district);
 	send(sockfd,district,sizeof(district),0);
 	char command[256];
 	while(1)
 	{
+		printf("***** COMMANDS *****");
+		printf("\n\nTo add a patient, type Adppatient firstname lastname datefound gender category officername\n");
+		printf("To add patient list, type Addpatientlist\n");
+		printf("To check file status, type Check_status\n");
+		printf("To add existing patient txt file, type Addpatient filename.txt\n");
+		printf("To serarch for patients, type Search criteria\n");
+		printf("*****          *****");
+		printf("\nEnter a command: ");
 		//Getting command
 		scanf("%s\t",command);
 		send(sockfd,command,100,0);
@@ -58,7 +66,7 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		bzero(command,40);
 		//fgets(patient_details,255,stdin);
-	scanf("%s\t%s\t%s\t%s\t%s\t%s",patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+		scanf("%s\t%s\t%s\t%s\t%s\t%s",patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
 		n = send(sockfd,(struct patient_details *)&patient,sizeof(patient),0);
 		if(n<0)
 			perror("Error on writing");

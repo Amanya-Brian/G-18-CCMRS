@@ -72,15 +72,15 @@ int main()
 		strcpy(dFile,district);
 		strcat(dFile,file_path);
         	recv(newsockfd,(struct patient_details *)&patient,sizeof(patient),0);
-        	fp = fopen(dFile, "a");
+        	fp = fopen(dFile, "a+");
    		//writing patient to a district file
-        	fprintf(fp ,"%s\t%s\t%s\t%s\t%s\t%s\n",patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+        	fprintf(fp ,"%-20s\t\t%-15s\t%-2s\t%-5s\n",patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
             	printf("\nSuccessfully added to %s",district);
         	fclose(fp);
         	bzero((void *)&patient,sizeof(patient));
         	printf("\n");
-		char status[255] = "Patient Added Successfully\n";
-		n = send(newsockfd,status,strlen(status),0);
+			char status[255] = "Patient Added Successfully\n";
+			n = send(newsockfd,status,strlen(status),0);
 			if(n<0)
 				perror("Error on writing");
 		//free(dFile);
