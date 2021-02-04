@@ -16,10 +16,10 @@ int main()
 	struct patient_details{
 		char fName[15];
 		char lName[15];
-		char dateFound[10];
-		char gender[1];
 		char category[20];
+		char dateFound[15];
 		char healthOfficer[20];
+		char gender[6];
 	}patient;
 	char file_check[256];
 	//Creating the socket
@@ -41,6 +41,14 @@ int main()
 	//fgets(district,sizeof(district),stdin);
 	scanf("%s",district);
 	send(sockfd,district,sizeof(district),0);
+	//creating patient file
+	FILE *fp;
+		char *file_path = ".txt";
+		char *dFile;
+		strcpy(dFile,district);
+		strcat(dFile,file_path);
+        	fp = fopen(dFile, "a");
+        	
 	char command[256];
 	while(1)
 	{
@@ -58,16 +66,20 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		bzero(command,40);
 		//fgets(patient_details,255,stdin);
-	scanf("%s\t%s\t%s\t%s\t%s\t%s",patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
-		n = send(sockfd,(struct patient_details *)&patient,sizeof(patient),0);
-		if(n<0)
-			perror("Error on writing");
+		scanf("%s %s %s %s %s %s",
+		patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+
+   		//writing patient to a district file
+        	fprintf(fp ,"%s %s %s %s %s %s\n",
+        	patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+            	//printf("Successfully added to %s\n",dFile);
+        	fclose(fp);
 		bzero((void *)&patient,sizeof(patient));
 		char status[40];
 		n = recv(sockfd,status,sizeof(status),0);
 		if(n<0)
 			perror("Error on reading");
-		printf("%s\n",status);
+		printf("%s%s\n",status,dFile);
 		}
 		
         //file check
