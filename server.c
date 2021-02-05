@@ -68,10 +68,33 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		//Inserting patient into file
         	bzero(command,40);
+        	printf("Adding patient to %s\n",district);
 		char status[255] = "Patient successfully added to ";
 		n = send(newsockfd,status,strlen(status),0);
 			if(n<0)
 				perror("Error on writing");
+		}
+		else if(strstr(command,"Check_status")){
+			FILE *fp;
+			char file_name[40];
+			strcat(district,".txt");
+        		fp = fopen(district, "r");
+        		printf("Requested number of patients in %s\n",district);
+        		char c;
+        		int count_lines = 0;
+        		if (fp == NULL)
+   	 		{
+        			printf("Could not open file %s\n", file_name);
+        			return 0;
+    			}
+    			// Extract characters from file and store in character c
+    			for (c = getc(fp); c != EOF; c = getc(fp))
+        		if (c == '\n') // Increment count if this character is newline
+            		count_lines = count_lines + 1;
+    			fclose(fp);
+        		char returned_lines[50];
+        		sprintf(returned_lines, "%d", count_lines); 
+        		send(newsockfd,returned_lines,sizeof(returned_lines),0);
 		}
 		else
 			continue;

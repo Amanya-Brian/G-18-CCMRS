@@ -21,7 +21,7 @@ int main()
 		char healthOfficer[20];
 		char gender[6];
 	}patient;
-	char file_check[256];
+	char file_check[256] = "Check_status";
 	//Creating the socket
 	sockfd = socket(AF_INET,SOCK_STREAM,0);
 	if(sockfd<0)
@@ -53,8 +53,9 @@ int main()
 	while(1)
 	{
 		//Getting command
-		scanf("%s\t",command);
+		scanf("%s",command);
 		send(sockfd,command,100,0);
+		
 		//breaking out of the loop
 		if(strstr(command,"done")){
 		bzero(command,sizeof(command));
@@ -79,16 +80,21 @@ int main()
 		n = recv(sockfd,status,sizeof(status),0);
 		if(n<0)
 			perror("Error on reading");
-		printf("%s%s\n",status,dFile);
+		printf("%s%s",status,dFile);
+		bzero(status,sizeof(status));
 		}
 		
         //file check
-		else if(strstr(command,file_check))
+		else if(strstr(command,"Check_status"))
 		{
-	    	char file_status[256];
-
-	    	recv(sockfd, file_status, 1000, 0);
-	    	printf("%s", file_status);
+		bzero(command,sizeof(command));
+	    	char file_status[100];
+	    	char file_name[40];
+	    	//strcpy(file_name,dFile);
+	    	//scanf("%s",file_name);
+	    	//send(sockfd,file_name,sizeof(file_name),0);
+	    	recv(sockfd, file_status,50, 0);
+	    	printf("There are %s patients in %s file", file_status,dFile);
 		}
         	else {
         		bzero(command,40);
