@@ -16,12 +16,12 @@ int main()
 	struct patient_details{
 		char fName[15];
 		char lName[15];
-		char dateFound[10];
-		char gender[1];
 		char category[20];
+		char dateFound[15];
 		char healthOfficer[20];
+		char gender[6];
 	}patient;
-	char file_check[256];
+	char file_check[256] = "Check_status";
 	//Creating the socket
 	sockfd = socket(AF_INET,SOCK_STREAM,0);
 	if(sockfd<0)
@@ -41,20 +41,30 @@ int main()
 	//fgets(district,sizeof(district),stdin);
 	scanf("%s",district);
 	send(sockfd,district,sizeof(district),0);
+	//creating patient file
+		FILE *fp;
+		char *file_path = ".txt";
+		char *dFile;
+		strcpy(dFile,district);
+		strcat(dFile,file_path);
+        //	fp = fopen(dFile, "a");
+        	
 	char command[256];
 	while(1)
 	{
-		printf("***** COMMANDS *****");
-		printf("\n\nTo add a patient, type Adppatient firstname lastname datefound gender category officername\n");
+		printf("\n\t\t***** COMMANDS *****");
+		printf("\nTo add a patient, type Adppatient firstname lastname datefound gender category officername\n");
 		printf("To add patient list, type Addpatientlist\n");
 		printf("To check file status, type Check_status\n");
 		printf("To add existing patient txt file, type Addpatient filename.txt\n");
 		printf("To serarch for patients, type Search criteria\n");
-		printf("*****          *****");
+		printf("To end session, type done\n");
+		printf("\t\t*****          *****");
 		printf("\nEnter a command: ");
 		//Getting command
-		scanf("%s\t",command);
+		scanf("%s",command);
 		send(sockfd,command,100,0);
+		
 		//breaking out of the loop
 		if(strstr(command,"done")){
 		bzero(command,sizeof(command));
@@ -66,25 +76,37 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		bzero(command,40);
 		//fgets(patient_details,255,stdin);
-		scanf("%s\t%s\t%s\t%s\t%s\t%s",patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
-		n = send(sockfd,(struct patient_details *)&patient,sizeof(patient),0);
-		if(n<0)
-			perror("Error on writing");
+
+		scanf("%s %s %s %s %s %s",
+		patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+
+   		//writing patient to a district file
+   		fp = fopen(dFile, "a");
+        	fprintf(fp ,"%-15s %-15s %-15s %-6s %-15s %-20s\n",
+        	patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+            	//printf("Successfully added to %s\n",dFile);
+        	fclose(fp);
+
 		bzero((void *)&patient,sizeof(patient));
 		char status[40];
 		n = recv(sockfd,status,sizeof(status),0);
 		if(n<0)
 			perror("Error on reading");
-		printf("%s\n",status);
+		printf("%s%s",status,dFile);
+		bzero(status,sizeof(status));
 		}
 		
         //file check
-		else if(strstr(command,file_check))
+		else if(strstr(command,"Check_status"))
 		{
-	    	char file_status[256];
-
-	    	recv(sockfd, file_status, 1000, 0);
-	    	printf("%s", file_status);
+		bzero(command,sizeof(command));
+	    	char file_status[100];
+	    	char file_name[40];
+	    	//strcpy(file_name,dFile);
+	    	//scanf("%s",file_name);
+	    	//send(sockfd,file_name,sizeof(file_name),0);
+	    	recv(sockfd, file_status,50, 0);
+	    	printf("There are %s patients in %s file", file_status,dFile);
 		}
         	else {
         		bzero(command,40);
