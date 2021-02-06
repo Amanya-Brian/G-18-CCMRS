@@ -6,7 +6,7 @@
             <span><strong>MENU</strong></span>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/index">
+              <a class="nav-link active" aria-current="page" href="/home">
                 <span data-feather="home"></span>
                 Home
               </a>
@@ -27,6 +27,12 @@
               <a class="nav-link" href="/EnrollOfficer">
                 <span data-feather="users"></span>
                  Enroll Officer
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/RecordFunds">
+                <span data-feather="users"></span>
+                 Record Monthly Funuds
               </a>
             </li>
             <li class="nav-item">

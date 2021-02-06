@@ -7,40 +7,27 @@ use Illuminate\Http\Request;
 
 use App\Models\Treasury;
 use App\Models\Officer;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use Auth;
 
 class PagesController extends Controller
 {
-   /* public function login(){
-        return view('pages.login');
-    }
-    public function checklogin(Request $request)
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-     $request->validate([
-      'username'   => 'required|string',
-      'password'  => 'required|alphaNum|min:5'
-     ]);
-
-     $user_data = array(
-      'username'  => $request->get('username'),
-      'password' => $request->get('password')
-     );
-
-     if(Auth::attempt($user_data))
-     {
-      return redirect('/home');
-     }
-     else
-     {
-      return back()->with('error', 'Wrong Login Details');
-     }
-
+        $this->middleware('auth');
     }
-    public function successlogin()
-    {
-     return view('home'); 
-    }*/
+
+    public function login(){
+        return view('layouts.app');
+    }
+
     public function index(){
         return view('pages.index');
     }
@@ -72,7 +59,9 @@ class PagesController extends Controller
     }
 
     public function PatientList(){
-        return view('pages.PatientList');
+        $patients = DB::select('select * from patients');
+        $total = DB::table('patients')->count();
+        return view('pages.PatientList', ['patients'=>$patients, 'total'=>$total]); 
     }
 
     public function Payments(){

@@ -19,15 +19,18 @@ use App\Http\Controllers\ChartJSController;
 Route::get('/','PagesController@index');
 
 //Route::get('/login','PagesController@login');
-oute::get('/chart-js','ChartJSController@index');
+Route::get('/chart-js','ChartJSController@index');
 
 
 
-Route::post('/login/checklogin','PagesController@checklogin');
 
-Route::get('/login/home','PagesController@successlogin');
+Route::get('/login','PagesController@login');
 
-Route::get('/login/logout','PagesController@logout');
+// Route::post('/login/checklogin','PagesController@checklogin');
+
+// Route::get('/login/home','PagesController@successlogin');
+
+// Route::get('/login/logout','PagesController@logout');
 
 Route::get('/EnrollOfficer','PagesController@EnrollOfficer');
 

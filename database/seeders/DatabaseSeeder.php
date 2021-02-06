@@ -21,11 +21,15 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+<<<<<<< HEAD
     public function run()
     {
        // $this->call(AdminsTablesSeeder::class);
        $this->call(PatientSeeder::class);
         
     }
+=======
+
+>>>>>>> a0e2e1658a727c4fa1af3716dd56077fd9602bb1
 }
 

@@ -24,8 +24,12 @@
                 <footer>Ministry of Health Uganda</footer>
             </div>
             
-        </div>
+        </div> 
         
 
    
+
+
+    </body>
+ 
 </html>
