@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\ChartJSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','PagesController@index');
 
 //Route::get('/login','PagesController@login');
+oute::get('/chart-js','ChartJSController@index');
+
+
 
 Route::post('/login/checklogin','PagesController@checklogin');
 
@@ -36,11 +41,22 @@ Route::get('/PatientList','PagesController@PatientList');
 
 Route::get('/Hierachy','PagesController@Hierachy');
 
-Route::get('/EnrolGraph','PagesController@EnrolGraph');
+//Route::get('/EnrolGraph','PagesController@EnrolGraph');
 
 Route::get('/Payments','PagesController@Payments');
 
-Route::get('/Donations','PagesController@Donations');
+//Route::get('/EnrolGraph', 'PatientController@index');
+
+Route::get('/EnrolGraph', [PatientController::class, 'index'])->name('pages.EnrolGraph');
+
+/*Route::get('/EnrolGraph',function(){
+    $chart = (new LarapexChart)->setTitle('Users')
+            ->setXAxis(['Active users','Blocked users'])
+            ->setDataset([100,50]);
+    return view('pages.EnrolGraph',compact('chart'));
+});*/
+
+
 
 Auth::routes();
 

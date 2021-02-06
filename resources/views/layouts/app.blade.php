@@ -12,6 +12,16 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{asset('js/chart.js')}}"></script>
+    <script src="{{!! $chart->cdn() !!}}"></script>
+    <script src="https://unpkg.com/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisn_chartjs.umd.js"></script>
+    <script src="{{ $chart->cdn()}}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    {{--ChartScript--}}
+    @if($chart)
+    {!! $chart->script() !!}
+    @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +29,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{--ChartScript--}}
+    @if($chart)
+    {!! $chart->script() !!}
+    @endif
 </head>
 <body>
     <div id="app">
@@ -79,6 +93,25 @@
         <main class="py-4">
             @yield('content')
         </main>
+       
     </div>
+    
+
+
+    @stack('modals')
+
+    @livewireScripts
+
+    
+    <!-- Charting library -->
+<script src="https://unpkg.com/chart.js@2.9.3/dist/Chart.min.js"></script>
+<!-- Chartisan -->
+<script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
+    @stack('js')
+
 </body>
+
+    
+    
+
 </html>

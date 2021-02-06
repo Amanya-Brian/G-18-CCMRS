@@ -15,7 +15,7 @@
             }
            </style>
     </head>
-Roy_laravel
+
     <body class="antialiased">
         @include('layouts.menu')
         <div class="container">
@@ -26,10 +26,6 @@ Roy_laravel
             
         </div>
         
-=======
-    <body class="antialiased" >
-        @yield('content')
-        <footer>Ministry of Health Uganda</footer>
- amanya_laravel
-    </body>
+
+   
 </html>

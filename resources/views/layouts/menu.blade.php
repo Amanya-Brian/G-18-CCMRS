@@ -20,7 +20,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/EnrolGraph">
                 <span data-feather="shopping-cart"></span>
-                Enrolment Graph
+                Enrollment Graph
               </a>
             </li>
             <li class="nav-item">
