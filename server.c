@@ -41,15 +41,6 @@ int main()
 	
 	char district[20];
 	recv(newsockfd,district,sizeof(district),0);
-	//char patient_details[256];
-	struct patient_details{
-		char fName[15];
-		char lName[15];
-		char dateFound[10];
-		char gender[1];
-		char category[20];
-		char healthOfficer[20];
-	}patient;
     	char command[40]; 
 	while(1)
 	{
@@ -68,18 +59,16 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		//Inserting patient into file
         	bzero(command,40);
-        	printf("Adding patient to %s\n",district);
-		char status[255] = "Patient successfully added to ";
-		n = send(newsockfd,status,strlen(status),0);
-			if(n<0)
-				perror("Error on writing");
+        	printf("Adding patient(s) to %s\n",district);
 		}
 		else if(strstr(command,"Check_status")){
+			bzero(command,40);
 			FILE *fp;
 			char file_name[40];
-			strcat(district,".txt");
-        		fp = fopen(district, "r");
-        		printf("Requested number of patients in %s\n",district);
+			strcpy(file_name,district);
+			strcat(file_name,".txt");
+        		fp = fopen(file_name, "r");
+        		printf("Requested number of patients in %s\n",file_name);
         		char c;
         		int count_lines = 0;
         		if (fp == NULL)
