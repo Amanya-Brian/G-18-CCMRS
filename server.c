@@ -41,6 +41,7 @@ int main()
 	
 	char district[20];
 	recv(newsockfd,district,sizeof(district),0);
+	printf("District: %s\n",district);
     	char command[40]; 
 	while(1)
 	{
@@ -68,7 +69,7 @@ int main()
 			strcpy(file_name,district);
 			strcat(file_name,".txt");
         		fp = fopen(file_name, "r");
-        		printf("Requested number of patients in %s\n",file_name);
+        		printf("Requested number of patients in %s\n\n",file_name);
         		char c;
         		int count_lines = 0;
         		if (fp == NULL)
@@ -85,6 +86,12 @@ int main()
         		sprintf(returned_lines, "%d", count_lines); 
         		send(newsockfd,returned_lines,sizeof(returned_lines),0);
 		}
+		else if(strstr(command,"Search"))
+		{
+				printf("Searched for records in %s.txt\n",district);
+		}
+		
+		
 		else
 			continue;
 	}

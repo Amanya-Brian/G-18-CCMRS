@@ -77,7 +77,7 @@ int main()
 			close(sockfd);
 		}
 		
-		//Adding patient list
+	//Adding patient list
 		else if(strstr(command,"Addpatientlist"))
 		{
 		bzero(command,40);
@@ -106,6 +106,30 @@ int main()
 	    	recv(sockfd, file_status,sizeof(file_status), 0);
 	    	printf("There are %s patients in %s file\n\n", file_status,district);
 		}
+		
+	//searching for a patient
+		else if(strstr(command,"Search"))
+		{
+		bzero(command,sizeof(command));
+		char criteria[50];
+		scanf("%s",criteria);
+		char line[100];
+		FILE *fp;
+		char file_name[40];
+		strcpy(file_name,district);
+		strcat(file_name,".txt");
+		fp = fopen(file_name,"r");
+		//printf("Searching for %s\n",criteria);
+		while(fgets(line,sizeof(line),fp)!=NULL)
+			{
+			if(strstr(line,criteria))
+			{
+			printf("%s\n",line);
+			}
+			line[0] = '\0';
+			}
+			bzero(criteria,sizeof(criteria));
+			}
         	else {
         		bzero(command,40);
         		printf("Invalid Command!\n");
