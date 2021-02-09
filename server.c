@@ -42,6 +42,7 @@ int main()
 	char district[20];
 	recv(newsockfd,district,sizeof(district),0);
 	printf("District: %s\n",district);
+	printf("...List of actions...\n\n");
     	char command[40]; 
 	while(1)
 	{

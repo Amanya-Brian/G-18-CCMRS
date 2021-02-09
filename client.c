@@ -98,16 +98,11 @@ int main()
 		 printf("Added %d patients to %s.txt\n\n",count,district);
 		}
 		
-	//Adding a patient file
 			
 	//Adding single patient and patient file
 		else if(strstr(command,"Addpatient")){
 		bzero(command,40);
 	//opening patient file
-		//char *file_path = ".txt";
-		//char *dFile;
-		//strcpy(dFile,district);
-		//strcat(dFile,file_path);
         	fp = fopen("patientRecords.txt", "a");
         	
         	char file_name[90];
