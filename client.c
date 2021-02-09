@@ -8,11 +8,8 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #define PORT 9898
-
-
-//adding patients function
-void addPatient(char *district){
-	struct patient_details{
+//patient structure
+struct patient_details{
 		char fName[15];
 		char lName[15];
 		char category[20];
@@ -20,23 +17,34 @@ void addPatient(char *district){
 		char healthOfficer[20];
 		char gender[6];
 	}patient;
-	
-	//creating patient file
+
+//creating patient file
 	FILE *fp;
-	char *file_path = ".txt";
-	char *dFile;
-	strcpy(dFile,district);
-	strcat(dFile,file_path);
-        fp = fopen(dFile, "a");
-        scanf("%s %s %s %s %s %s",
-	patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
-   	
-   	//writing patient to a district file
+
+//add patient function
+void addPatient(char *file_name){
+	
+        //writing patient to a patientRecords file
+        fp = fopen("patientRecords.txt", "a");
+   	strcpy(patient.fName,file_name);
+   	scanf("%s %s %s %s %s",
+	patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
         fprintf(fp ,"%s %s %s %s %s %s\n",
         patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
         fclose(fp);
-	}
+}
 
+//add patient list
+void addPatientList(){
+	//opening patient file
+        fp = fopen("patientRecords.txt", "a");
+   	//writing patient to a district file
+   	scanf("%s %s %s %s %s %s",
+	patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+        fprintf(fp ,"%s %s %s %s %s %s\n",
+        patient.fName,patient.lName,patient.dateFound,patient.gender,patient.category,patient.healthOfficer);
+        fclose(fp);
+}
 
 int main()
 {
@@ -82,20 +90,52 @@ int main()
 		{
 		bzero(command,40);
 		int count = 0;
-		 for(int i=0;i<2;i++)
+		for(int i=0;i<2;i++)
 		 {
-			addPatient(district);
+		 	addPatientList();
 			count = count + 1;
 		 }
 		 printf("Added %d patients to %s.txt\n\n",count,district);
 		}
+		
+	//Adding a patient file
 			
-		//Adding single patient
+	//Adding single patient and patient file
 		else if(strstr(command,"Addpatient")){
 		bzero(command,40);
-		addPatient(district);
-		printf("Patient successfully added to %s.txt\n\n",district);
+	//opening patient file
+		//char *file_path = ".txt";
+		//char *dFile;
+		//strcpy(dFile,district);
+		//strcat(dFile,file_path);
+        	fp = fopen("patientRecords.txt", "a");
+        	
+        	char file_name[90];
+		scanf("%s",file_name);
+   		if(strstr(file_name,".txt"))
+   		{
+   		FILE *fr;
+   		char content[200];
+ 		fr = fopen(file_name,"r");
+   		if(fr==NULL){
+   		printf("File doesnot exist\n");
+   		}
+   		while(fgets(content,sizeof(content),fr)!=NULL)
+		{
+		fprintf(fp,"%s",content);
+		//content[0] = '\0';
 		}
+		fclose(fp);
+		fclose(fr);
+		printf("Adding patients from %s to patientRecords.txt\n\n",file_name);	
+		bzero(file_name,sizeof(file_name));
+   		}
+   		else
+   		{
+		addPatient(file_name);
+		printf("Patient successfully added to patientRecords.txt\n\n");
+		}
+	}
 				
         //file check
 		else if(strstr(command,"Check_status"))
@@ -104,7 +144,7 @@ int main()
 	    	char file_status[100];
 	    	char file_name[40];
 	    	recv(sockfd, file_status,sizeof(file_status), 0);
-	    	printf("There are %s patients in %s file\n\n", file_status,district);
+	    	printf("There are %s patients in patientRecords.txt\n\n", file_status);
 		}
 		
 	//searching for a patient
@@ -114,20 +154,16 @@ int main()
 		char criteria[50];
 		scanf("%s",criteria);
 		char line[100];
-		FILE *fp;
-		char file_name[40];
-		strcpy(file_name,district);
-		strcat(file_name,".txt");
-		fp = fopen(file_name,"r");
-		//printf("Searching for %s\n",criteria);
+		fp = fopen("patientRecords.txt","r");
 		while(fgets(line,sizeof(line),fp)!=NULL)
-			{
+		{
 			if(strstr(line,criteria))
 			{
 			printf("%s\n",line);
 			}
 			line[0] = '\0';
-			}
+		}
+			fclose(fp);
 			bzero(criteria,sizeof(criteria));
 			}
         	else {

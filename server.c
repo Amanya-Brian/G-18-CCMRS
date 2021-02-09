@@ -60,14 +60,12 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		//Inserting patient into file
         	bzero(command,40);
-        	printf("Adding patient(s) to %s\n",district);
+        	printf("Adding patient(s) to patientRecords file\n\n");
 		}
 		else if(strstr(command,"Check_status")){
 			bzero(command,40);
 			FILE *fp;
-			char file_name[40];
-			strcpy(file_name,district);
-			strcat(file_name,".txt");
+			char file_name[20] = "patientRecords.txt";
         		fp = fopen(file_name, "r");
         		printf("Requested number of patients in %s\n\n",file_name);
         		char c;
@@ -88,7 +86,7 @@ int main()
 		}
 		else if(strstr(command,"Search"))
 		{
-				printf("Searched for records in %s.txt\n",district);
+				printf("Searched for records in patientRecords.txt\n\n");
 		}
 		
 		
