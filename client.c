@@ -17,7 +17,7 @@ void commands(){
 		printf("To add patient list, type Addpatientlist\n");
 		printf("To add existing patient txt file, type Addpatient filename.txt\n");
 		printf("To check file status, type Check_status\n");
-		printf("To serarch for patients, type Search criteria\n");
+		printf("To search for patients, type Search criteria\n");
 		printf("\n\t\t\t***To end session,type done***\t\t\n\n");
 		printf("***********************					**********************\n");
 }
@@ -82,6 +82,7 @@ int main()
 	//Connecting to server
 	if(connect(sockfd, (struct sockaddr *)&serv_addr,sizeof(serv_addr))<0)
 		perror("Connection Faield");
+
 	printf(" \t--------- COVID-19 MANAGEMENT AND REPORTING ---------- \t\n\n");
 	
 	//capturing district
@@ -89,12 +90,25 @@ int main()
 	printf(">>>Please Enter your District!\n");
 	scanf("%s",district);
 	send(sockfd,district,sizeof(district),0);
+
         system("clear");
         commands();
+
 	char command[256];
 	while(1)
 	{
+	/*	printf("\n\t\t***** COMMANDS *****");
+		printf("\nTo add a patient, type Adppatient firstname lastname datefound gender category officername\n");
+		printf("To add patient list, type Addpatientlist\n");
+		printf("To check file status, type Check_status\n");
+		printf("To add existing patient txt file, type Addpatient filename.txt\n");
+		printf("To serarch for patients, type Search criteria\n");
+		printf("To end session, type done\n");
+		printf("\t\t*****          *****");
+		printf("\nEnter a command: ");
+	*/	
 	//Getting command
+
 		scanf("%s",command);
 		send(sockfd,command,100,0);
 		
@@ -131,7 +145,9 @@ int main()
         	commands();
         	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n\n");
 		bzero(command,40);
+
 		//opening patient file
+
         	fp = fopen("patientRecords.txt", "a");
         	
         	char file_name[90];
@@ -148,6 +164,7 @@ int main()
 		{
 		fprintf(fp,"%s",content);
 		//content[0] = '\0';
+
 		}
 		fclose(fp);
 		fclose(fr);
