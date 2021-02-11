@@ -112,7 +112,7 @@ int main()
 		{
 		system("clear");
         	commands();
-        	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n");
+        	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n\n");
 		bzero(command,40);
 		int count = 0;
 		for(int i=0;i<2;i++)
@@ -129,7 +129,7 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		system("clear");
         	commands();
-        	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n");
+        	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n\n");
 		bzero(command,40);
 		//opening patient file
         	fp = fopen("patientRecords.txt", "a");
@@ -168,7 +168,7 @@ int main()
 		{
 		system("clear");
         	commands();
-        	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n");
+        	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n\n");
 		bzero(command,sizeof(command));
 	    	char file_status[100];
 	    	char file_name[40];
@@ -182,7 +182,7 @@ int main()
 		{
 		system("clear");
         	commands();
-        	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n");
+        	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n\n");
 		bzero(command,sizeof(command));
 		char criteria[50];
 		scanf("%s",criteria);
@@ -203,7 +203,7 @@ int main()
         	else {
         		system("clear");
         		commands();
-        		printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n");
+        		printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n\n");
         		bzero(command,40);
         		printf("Invalid Command!\n");
         		next();
