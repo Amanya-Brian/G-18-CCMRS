@@ -29,7 +29,7 @@ void main() {
 		exit(1);
 	}
 	
-	fptr = fopen("patientRecords.txt", "r");
+	fptr = fopen("/home/amanya/Desktop/sockets/patientRecords.txt", "r");
         
         //if file does not exist	
 	if (fptr == NULL)
