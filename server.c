@@ -41,15 +41,8 @@ int main()
 	
 	char district[20];
 	recv(newsockfd,district,sizeof(district),0);
-	//char patient_details[256];
-	struct patient_details{
-		char fName[15];
-		char lName[15];
-		char dateFound[10];
-		char gender[1];
-		char category[20];
-		char healthOfficer[20];
-	}patient;
+	printf("District: %s\n",district);
+	printf("...List of actions...\n\n");
     	char command[40]; 
 	while(1)
 	{
@@ -68,6 +61,7 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		//Inserting patient into file
         	bzero(command,40);
+<<<<<<< HEAD
 
         	printf("Adding patient to %s\n",district);
 		char status[255] = "Patient successfully added to ";
@@ -75,13 +69,16 @@ int main()
 
 			if(n<0)
 				perror("Error on writing");
+=======
+        	printf("Adding patient(s) to patientRecords file\n\n");
+>>>>>>> e4cb43547121f0945a16669ac41d98417a97b9fe
 		}
 		else if(strstr(command,"Check_status")){
+			bzero(command,40);
 			FILE *fp;
-			char file_name[40];
-			strcat(district,".txt");
-        		fp = fopen(district, "r");
-        		printf("Requested number of patients in %s\n",district);
+			char file_name[20] = "patientRecords.txt";
+        		fp = fopen(file_name, "r");
+        		printf("Requested number of patients in %s\n\n",file_name);
         		char c;
         		int count_lines = 0;
         		if (fp == NULL)
@@ -98,6 +95,12 @@ int main()
         		sprintf(returned_lines, "%d", count_lines); 
         		send(newsockfd,returned_lines,sizeof(returned_lines),0);
 		}
+		else if(strstr(command,"Search"))
+		{
+				printf("Searched for records in patientRecords.txt\n\n");
+		}
+		
+		
 		else
 			continue;
 	}
