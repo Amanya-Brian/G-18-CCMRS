@@ -7,19 +7,24 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">Patient Id</th>
-              <th scope="col">Patient Name</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Date Identified</th>
               <th scope="col">Gender</th>
               <th scope="col">Category</th>
-              <th scope="col">Identification Date</th>
+              <th scope="col">Officer</th>
             </tr>
           </th>
           @foreach ($patients as $patient)
           <tr>
           <td>{{ $patient->patientId }}</td>
-          <td>{{ $patient->patientName }}</td>
+          <td>{{ $patient->fName }}</td>
+          <td>{{ $patient->lName }}</td>
+          <td>{{ $patient->date }}</td>
           <td>{{ $patient->gender }}</td>
           <td>{{ $patient->category }}</td>
-          <td>{{ $patient->date_of_identification }}</td>
+          <td>{{ $patient->officer }}</td>
+          
           </tr>
           @endforeach
           </table>
