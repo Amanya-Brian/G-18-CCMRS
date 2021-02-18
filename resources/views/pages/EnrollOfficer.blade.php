@@ -1,5 +1,5 @@
-@extends('layouts.layout') 
-  @section('content')  
+@extends('layouts.layout')
+  @section('content')
 
 <h1>Welcome to CCMRS</h1>
         <h3>Officer Enrollment</h3>
@@ -23,10 +23,7 @@
                 <label>District</label>
                 <input type="text" id="district" name="district" class="form-control" required="">
               </div>
-              <div class="form-group">
-                <label>Hospital</label>
-                <input type="text" id="hospital" name="hospital" class="form-control" required="">
-              </div>
+
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>

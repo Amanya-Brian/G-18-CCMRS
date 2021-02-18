@@ -61,25 +61,72 @@ class PagesController extends Controller
     }
 
     public function Donations(){
-        return view('pages.Donations');
+        $getFirstMonth = DB::table('funds')->where('transactionid', '=', 1)->get();
+        //dd($getFirstMonth);
+        $donations = DB::table('treasuries')->where("date", $getFirstMonth[0]->date)->get();
+        $allmonths = DB::table('funds')->get();
+        $default = $getFirstMonth;
+
+        $months = DB::table('treasuries')->get();
+        return view('pages.Donations',compact(['donations',$donations,'allmonths',
+        $allmonths, 'default', $getFirstMonth]));
+    }
+    public function donationsgraph(Request $request){
+       //dd($request);
+       $getFirstMonth = DB::table('funds')->where('Month', '=', $request->month)->get();
+        //dd($getFirstMonth);
+        $donations = DB::table('treasuries')->where("date", $request->month)->get();
+        $allmonths = DB::table('funds')->get();
+        $default = $getFirstMonth;
+       // dd($default[0]->Month);
+
+        $months = DB::table('treasuries')->get();
+        return view('pages.Donations',compact(['donations',$donations,'allmonths',
+        $allmonths, 'default', $getFirstMonth]));
     }
 
     public function EnrolGraph(){
         return view('pages.EnrolGraph');
     }
-    
+
     public function EnrollOfficer(){
         return view('pages.EnrollOfficer');
+    }
+    protected function count_officers(){
+        //return
     }
 
     public function StoreOfficer(Request $request)
     {
-        $officer = new Officer;
-        $officer->username = $request->username;
-        $officer->district = $request->district;
-        $officer->hospital = $request->hospital;
-        $officer->save();
-        return redirect('/EnrollOfficer')->with('status', 'A new officer has been added.');
+
+
+        $miniunm =  DB::table("hospitals")->min('number_of_officers');
+
+        //dd($miniunm);
+        //dd($miniunm);
+        //loop
+
+
+        $getHospital = DB::table("hospitals")->where("number_of_officers", "=", $miniunm)->first();
+       //dd($getHospital);
+
+                       DB::table('hospitals')->where('hospitalId', '=', $getHospital->hospitalId)->increment("number_of_officers", 1);
+
+                       //assign officer
+
+
+       //dd($getHospital[0]->?);s
+        //here
+        if($getHospital){
+            $officer = new Officer;
+            $officer->username = $request->username;
+            $officer->district = $request->district;
+            $officer->hospital = $getHospital->hospitalName;
+           $officer->save();
+            return redirect('/EnrollOfficer')->with('status', 'A new officer has been added to '. $getHospital->hospitalName);
+
+        }
+
     }
 
     public function Hierachy(){
@@ -89,12 +136,14 @@ class PagesController extends Controller
     public function PatientList(){
         $patients = DB::select('select * from patients');
         $total = DB::table('patients')->count();
-        return view('pages.PatientList', ['patients'=>$patients, 'total'=>$total]); 
+        return view('pages.PatientList', ['patients'=>$patients, 'total'=>$total]);
     }
 
-    public function Payments(){
+    /*public function Payments(){
+
+        DB::table("funds")->
         return view('pages.Payments');
-    }
+    }*/
 
     public function RecordFunds(){
         return view('pages.RecordFunds');

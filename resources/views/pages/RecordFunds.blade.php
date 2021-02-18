@@ -19,6 +19,10 @@
                 <label>Amount</label>
                 <input type="text" id="amount" name="amount" class="form-control" required="">
               </div>
+              <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="amount" name="month" class="form-control" required >
+              </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
