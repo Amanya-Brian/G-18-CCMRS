@@ -1,1 +1,17 @@
+<<<<<<< HEAD
 .autogit
+=======
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+>>>>>>> 2adbfc41b20fc7e599045845ac13dde0ce9506b8

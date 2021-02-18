@@ -1,5 +1,0 @@
-Amanya    Joseph    2020-11-06   Male    Asymptomatic    Zombo
-Natseli    Godfrey    2020-08-16    Male    Asymptomatic    Bunjo
-Daisy    Nenzy    2020-07-22    Female    symptomatic    Nunu
-Ayebale    Angel    2021-01-15    Female    Asymptomatic    Voller
-Mwebaze    Precious    2020-11-18    Female    Symptomatic    Suzan

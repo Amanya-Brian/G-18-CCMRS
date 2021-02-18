@@ -1,5 +1,5 @@
-#include "/opt/lampp/include/mysql.h"
-#include <mysql/mysql.h>
+//#include "/opt/lampp/include/mysql.h"
+#include <mysql.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,8 +13,8 @@ void main() {
 	
 	char *server = "127.0.0.1";
 	char *user = "root";
-	char *password = ""; 
-	char *database = "test";
+	char *password = "06731"; 
+	char *database = "recess";
 	
 	char c[100];
 	char line[256];
@@ -29,7 +29,7 @@ void main() {
 		exit(1);
 	}
 	
-	fptr = fopen("/home/amanya/Desktop/sockets/patientRecords.txt", "r");
+	fptr = fopen("/home/hastings/G-18-CCMRS/C_Files/patientRecords.txt", "r");
         
         //if file does not exist	
 	if (fptr == NULL)
@@ -55,14 +55,15 @@ void main() {
 		printf("Category: ");puts(categoryv);
 		printf("Officer: ");puts(officerv);  */
 		
-		char query_string[] = {"INSERT INTO `patients`(`fName`, `lName`, `date`, `gender`, `category`, `officer`) VALUES('%s', '%s', '%s', '%s', '%s', '%s')"};		
+		char query_string[] = {"INSERT INTO `patientRecords`(`fName`, `lName`, `date`, `gender`, `category`, `officer`) VALUES('%s', '%s', '%s', '%s', '%s', '%s')"};		
 		sprintf(q, query_string, fNamev, lNamev, datev, genderv, categoryv, officerv);
 		if (mysql_query(conn, q)) {
 			fprintf(stderr, "%s\n", mysql_error(conn));
 			exit(1);
 		}    
 	  }
-	
+	fclose(fptr);
+	fptr = fopen("/home/hastings/G-18-CCMRS/C_Files/patientRecords.txt","w");
 	fclose(fptr);
 /*	// reads text until newline is encountered
 	
@@ -88,5 +89,6 @@ void main() {
    
 	/* close connection */
 	//mysql_free_result(res);
+	
 	mysql_close(conn);
 }

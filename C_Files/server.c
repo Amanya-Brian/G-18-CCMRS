@@ -61,18 +61,11 @@ int main()
 		else if(strstr(command,"Addpatient")){
 		//Inserting patient into file
         	bzero(command,40);
-<<<<<<< HEAD
-
-        	printf("Adding patient to %s\n",district);
+        	printf("Adding patient to patientRecords.txt\n");
 		char status[255] = "Patient successfully added to ";
-		n = send(newsockfd,status,strlen(status),0);
-
-			if(n<0)
-				perror("Error on writing");
-=======
         	printf("Adding patient(s) to patientRecords file\n\n");
->>>>>>> e4cb43547121f0945a16669ac41d98417a97b9fe
 		}
+		
 		else if(strstr(command,"Check_status")){
 			bzero(command,40);
 			FILE *fp;

@@ -188,7 +188,7 @@ int main()
         	printf("\t\t\t***** CURRENT OUTPUT *****\t\t\n\n");
 		bzero(command,sizeof(command));
 	    	char file_status[100];
-	    	char file_name[40];
+	    	//char file_name[40];
 	    	recv(sockfd, file_status,sizeof(file_status), 0);
 	    	printf("There are %s patients in patientRecords.txt\n\n", file_status);
 	    	next();
