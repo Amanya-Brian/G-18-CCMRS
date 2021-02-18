@@ -2,7 +2,7 @@
   <!doctype html>
 <html lang="en">
   <head>
-    <title>Laravel 8 Google Bar Chart Example Tutorial - Tutsmake.com</title>
+    <title>Donations Graph</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -44,7 +44,7 @@
     </div>
     <h2 style="text-align: center;">A Graph of donations in {{$default[0]->Month}}</h2>
     <div class="container-fluid p-5">
-    <div id="barchart_material" style="width: 100%; height: 500px;">jjjjj</div>
+    <div id="barchart_material" style="width: 100%; height: 500px;"></div>
     </div>
 
     <script type="text/javascript">
@@ -54,12 +54,13 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['date', 'amount']
+            ['donor', 'amount']
 
             @php
               foreach($donations as $donation)
               {
-                echo ",['".$donation->date."',".$donation->amount."]";
+                //dd($donation);
+                echo ",['".$donation->donor."',".$donation->amount."]";
               }
 
               @endphp
@@ -70,8 +71,8 @@
 
         options = {
           chart: {
-            title: 'Bar Graph | Price',
-            subtitle: 'Price, and Product Name',
+            title: 'Bar Graph | Donations',
+            subtitle: 'Donor, and Amount',
           },
           bars: 'vertical'
         };
@@ -79,6 +80,7 @@
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
     </script>
+    <button type="button" class="btn btn-link"><a href="{{ url('/') }}">Home</a></button>
 
 </body>
 </html>

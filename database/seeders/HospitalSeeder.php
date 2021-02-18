@@ -1,19 +1,18 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Hospitals;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class HospitalSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        \App\Models\Hospital::factory(155)->create();
+        Hospital::factory()->count(155)->create();
     }
-
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Treasury;
 use App\Models\Officer;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Validator;
 use Auth;
 
@@ -61,24 +62,25 @@ class PagesController extends Controller
     }
 
     public function Donations(){
-        $getFirstMonth = DB::table('funds')->where('transactionid', '=', 1)->get();
+        $getFirstMonth = DB::table('treasuries')->where('transactionid', '=', 1)->get();
         //dd($getFirstMonth);
-        $donations = DB::table('treasuries')->where("date", $getFirstMonth[0]->date)->get();
+        $donations = DB::table('treasuries')->where("date", $getFirstMonth[0]->donor)->get();
         $allmonths = DB::table('funds')->get();
         $default = $getFirstMonth;
-
+        //dd($default);
         $months = DB::table('treasuries')->get();
         return view('pages.Donations',compact(['donations',$donations,'allmonths',
         $allmonths, 'default', $getFirstMonth]));
     }
     public function donationsgraph(Request $request){
-       //dd($request);
+      // dd($request);
        $getFirstMonth = DB::table('funds')->where('Month', '=', $request->month)->get();
         //dd($getFirstMonth);
         $donations = DB::table('treasuries')->where("date", $request->month)->get();
+        //dd($donations);
         $allmonths = DB::table('funds')->get();
         $default = $getFirstMonth;
-       // dd($default[0]->Month);
+        //dd($default[0]->Month);
 
         $months = DB::table('treasuries')->get();
         return view('pages.Donations',compact(['donations',$donations,'allmonths',
@@ -86,7 +88,15 @@ class PagesController extends Controller
     }
 
     public function EnrolGraph(){
-        return view('pages.EnrolGraph');
+        $data = DB::table('patients')->whereMonth("date", "=", date('m',"date"))->get();
+        // ->select(\DB::raw("COUNT(*) as count"), \DB::raw("MONTHNAME(created_at) as month_name"),\DB::raw('max(created_at) as createdAt'))
+        // ->whereYear('created_at', date('Y'))
+        // ->groupBy('month_name')
+        // ->orderBy('createdAt')
+        // ->get();
+        dd($data);
+ 
+        return view('pages.EnrolGraph',$data);
     }
 
     public function EnrollOfficer(){
@@ -110,7 +120,7 @@ class PagesController extends Controller
         $getHospital = DB::table("hospitals")->where("number_of_officers", "=", $miniunm)->first();
        //dd($getHospital);
 
-                       DB::table('hospitals')->where('hospitalId', '=', $getHospital->hospitalId)->increment("number_of_officers", 1);
+        DB::table('hospitals')->where('hospitalId', '=', $getHospital->hospitalId)->increment("number_of_officers", 1);
 
                        //assign officer
 

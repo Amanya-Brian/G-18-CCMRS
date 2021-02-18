@@ -13,6 +13,11 @@
              margin:0 auto;
              border:1px solid #ccc;
             }
+            body{
+                background-image: url("images/backgroundone.jpg");
+                background-repeat: no-repeat, repeat;
+                background-size: cover; 
+            }
            </style>
     </head>
     <body class="antialiased">

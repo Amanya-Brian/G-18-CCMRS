@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-@charset "UTF-8";
+/*@charset "UTF-8";*/
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -63,6 +63,7 @@ body {
   color: #212529;
   text-align: left;
   background-color: #f8fafc;
+  
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

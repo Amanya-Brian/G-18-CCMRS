@@ -29,5 +29,6 @@
           @endforeach
           </table>
           <p>Total Patients: {{ $total }}  </p> 
+          <button type="button" class="btn btn-link"><a href="{{ url('/') }}">Home</a></button>
 
 @endsection

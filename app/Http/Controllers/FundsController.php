@@ -52,7 +52,7 @@ class FundsController extends Controller
             DB::update('update funds set Amount = ? where Month = ?', [$totalAmount, $month]);
 
             //insert into transaction table
-            DB::insert('insert into treasuries (date, amount) values (?, ?)', [$month, $request->amount]);
+            DB::insert('insert into treasuries (date, amount, donor) values (?, ?, ?)', [$month, $request->amount, $request->donor]);
             
 
             //r
@@ -65,7 +65,7 @@ class FundsController extends Controller
                         //insert into funds
                         DB::insert('insert into funds (Month, Amount) values (?, ?)', [$month, $request->amount]);
                         //insert into transaction table
-             DB::insert('insert into treasuries (date, amount) values (?, ?)', [$month, $request->amount]);
+             DB::insert('insert into treasuries (date, amount, donor) values (?, ?, ?)', [$month, $request->amount, $request->donor]);
 
              return redirect('/RecordFunds')->with('status', 'Monthly funds Have Been inserted');
 

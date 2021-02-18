@@ -23,8 +23,13 @@
                 <label>Date</label>
                 <input type="date" id="amount" name="month" class="form-control" required >
               </div>
+              <div class="form-group">
+                <label>Donor</label>
+                <input type="text" id="amount" name="donor" class="form-control" required >
+              </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>
+        <button type="button" class="btn btn-link"><a href="{{ url('/') }}">Home</a></button>
 @endsection

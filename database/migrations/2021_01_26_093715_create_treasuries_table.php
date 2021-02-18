@@ -17,6 +17,7 @@ class CreateTreasuriesTable extends Migration
             $table->bigIncrements('transactionId');
             $table->string('date', $precision = 0);
             $table->float('amount', 12, 2);
+            $table->string('donor');
         });
     }
 
